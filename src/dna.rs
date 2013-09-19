@@ -13,7 +13,7 @@ pub struct Dna<T> {
 }
 
 #[deriving(ToStr)]
-impl<T: Rand + Clone + ToStr> Dna<T> {
+impl<T: Rand + Clone> Dna<T> {
   pub fn new(nb_genes: uint) -> Dna<T> {
     let max_val: f64 = Bounded::max_value();
     Dna

@@ -1,4 +1,5 @@
 use std::rand::Rand;
+use std::rand::Rng;
 use std::vec;
 use extra::sort;
 use extra::bitv::from_fn;
@@ -11,7 +12,7 @@ pub struct GeneticAlgorithm<T> {
   best:             Dna<T>
 }
 
-impl<T: Rand + Clone + ToStr> GeneticAlgorithm<T> {
+impl<T: Rand + Clone> GeneticAlgorithm<T> {
   pub fn new(pop_size:         uint,
              dna_length:       uint,
              mutation_rate:    f64,
@@ -56,5 +57,4 @@ impl<T: Rand + Clone + ToStr> GeneticAlgorithm<T> {
 
     self.population = res_pop;
   }
-
 }
