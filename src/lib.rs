@@ -9,3 +9,4 @@ extern mod extra;
 
 pub mod dna;
 pub mod ga;
+pub mod dtw;
