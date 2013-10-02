@@ -15,7 +15,7 @@ fn bench(name: &str, thresh: f64, ga: &mut GeneticAlgorithm<f64>, fit_fn: &fn(co
         fit_fn(c)
       }
       count = count + 1;
-      println("Epoch : " + count.to_str() + " - best score: " + (-ga.best.score).to_str());
+      println("Epoch : " + count.to_str() + " - best score: " + (ga.best.score).to_str());
     }
 
     let rand_code: ~[f64] = vec::from_fn(ga.best.code.len(), |_| rand::random());
@@ -31,10 +31,12 @@ fn bench(name: &str, thresh: f64, ga: &mut GeneticAlgorithm<f64>, fit_fn: &fn(co
 
 #[main]
 fn main() {
-    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(8000, 20, 0.2, 50);
+    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(8000, 20, 0.2, 40.0, 50);
     do bench("De Jong's", -0.001, &mut ga) |c| {
         // Restrict to hypercube -5.12 <= x <= 5.12
-        c.map(|e| (e - 0.5) * 10.24);
-        0.0 - c.iter().fold(0.0, |a, e2| a + (*e2) * (*e2))
+        0.0 - c.iter().fold(0.0, |a, e| {
+                                let e2 = (*e - 0.5) * 10.24;
+                                a + e2 * e2
+                            })
     }
 }

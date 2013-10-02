@@ -57,11 +57,18 @@ impl<T: Rand + Clone> Dna<T> {
     }
   }
 
-  pub fn perturbate(&mut self, mutation_rate: f64) {
+  pub fn perturbate(&mut self, mutation_rate: f64, persistency: f64) {
 
     self.code = do vec::from_fn(self.nb_genes) |i| {
         let rand_val: f64 = rand::random();
-        let weight = (-(self.ages[i] as f64) / 120.).exp();
+        let weight = {
+          if persistency <= 0.0 {
+            1.0
+          }
+          else {
+            (-(self.ages[i] as f64) / persistency).exp()
+          }
+        };
         if rand_val <= (mutation_rate * weight) {
           self.ages[i] = 0;
           rand::random()

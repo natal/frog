@@ -8,6 +8,7 @@ use dna::Dna;
 pub struct GeneticAlgorithm<T> {
   population:       ~[Dna<T>],
   mutation_rate:    f64, // ~0.5 (too much or too less leads to bad results
+  gene_persistency: f64,
   selection_amount: uint,
   best:             Dna<T>
 }
@@ -16,6 +17,7 @@ impl<T: Rand + Clone> GeneticAlgorithm<T> {
   pub fn new(pop_size:         uint,
              dna_length:       uint,
              mutation_rate:    f64,
+             gene_persistency: f64,
              selection_amount: uint) -> GeneticAlgorithm<T> {
 
     let population = vec::from_fn(pop_size, |_| Dna::new_random(dna_length));
@@ -24,6 +26,7 @@ impl<T: Rand + Clone> GeneticAlgorithm<T> {
       population:       population,
       mutation_rate:    mutation_rate,
       selection_amount: selection_amount,
+      gene_persistency: gene_persistency,
       best:             Dna::new_random(dna_length)
     }
   }
@@ -33,7 +36,7 @@ impl<T: Rand + Clone> GeneticAlgorithm<T> {
               fitness_fn: &fn(code: &[T]) -> f64) {
 
     for d in self.population.mut_iter() {
-        d.perturbate(self.mutation_rate);
+        d.perturbate(self.mutation_rate, self.gene_persistency);
     }
 
     for d in self.population.mut_iter() {
