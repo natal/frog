@@ -6,6 +6,7 @@
 #[warn(non_camel_case_types)]
 
 extern mod extra;
+extern mod nalgebra;
 
 pub mod dna;
 pub mod ga;
