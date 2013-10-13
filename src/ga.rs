@@ -1,5 +1,4 @@
 use std::rand::Rand;
-use std::rand::Rng;
 use std::vec;
 use extra::sort;
 use extra::bitv::from_fn;
