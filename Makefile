@@ -1,15 +1,17 @@
 nalgebra_lib_path=./lib/nalgebra/lib
+build_ex_cmd=rustc --opt-level=3 -L./lib -L$(nalgebra_lib_path) --out-dir bin
 
 all:
 	mkdir -p bin
 	mkdir -p lib
-	rustc --lib --opt-level=3 src/lib.rs -L./lib/nalgebra/lib --out-dir lib
-	rustc --opt-level=3 examples/dejong.rs -L./lib/nalgebra/lib -L./lib --out-dir bin
-	rustc --opt-level=3 examples/michalewicz.rs -L./lib/nalgebra/lib -L./lib --out-dir bin
-	rustc --opt-level=3 examples/dejongf2.rs -L./lib/nalgebra/lib -L./lib --out-dir bin
-	rustc --opt-level=3 examples/dejongf3.rs -L./lib/nalgebra/lib -L./lib --out-dir bin
-	rustc --opt-level=3 examples/goldstein.rs -L./lib/nalgebra/lib -L./lib --out-dir bin
-	rustc --opt-level=3 examples/rosenbrock.rs -L./lib/nalgebra/lib -L./lib --out-dir bin
+	rustc --lib --opt-level=3 src/lib.rs -L$(nalgebra_lib_path) --out-dir lib
+	$(build_ex_cmd) examples/circuit.rs
+	$(build_ex_cmd) examples/dejong.rs
+	$(build_ex_cmd) examples/michalewicz.rs
+	$(build_ex_cmd) examples/dejongf2.rs
+	$(build_ex_cmd) examples/dejongf3.rs
+	$(build_ex_cmd) examples/goldstein.rs
+	$(build_ex_cmd) examples/rosenbrock.rs
 
 deps:
 	make -C lib/nalgebra
