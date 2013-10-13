@@ -10,3 +10,4 @@ extern mod nalgebra;
 
 pub mod ga;
 pub mod dtw;
+pub mod simulated_annealing;
