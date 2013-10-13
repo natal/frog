@@ -8,6 +8,5 @@
 extern mod extra;
 extern mod nalgebra;
 
-pub mod dna;
 pub mod ga;
 pub mod dtw;
