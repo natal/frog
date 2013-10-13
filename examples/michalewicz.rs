@@ -31,8 +31,8 @@ fn bench(name: &str, thresh: f64, ga: &mut GeneticAlgorithm<f64>, fit_fn: &fn(co
 
 #[main]
 fn main() {
-    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(2000, 2, 0.2, 40.0, 100);
-    do bench("Michalewicz", 1.8, &mut ga) |c| {
+    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(3000, 10, 0.2, 60.0, 130);
+    do bench("Michalewicz", 9.66, &mut ga) |c| {
         // Restrict to hypercube -5.12 <= x <= 5.12
 
         let mut res  = 0.0;
