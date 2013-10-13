@@ -32,12 +32,18 @@ fn bench(name: &str, thresh: f64, ga: &mut GeneticAlgorithm<f64>, fit_fn: &fn(co
 #[main]
 fn main() {
     let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(3000, 2, 0.8, 60.0, 100);
-    let bmax = 5.12 * 2.0;
-    do bench("De Jong f3", 9.0, &mut ga) |c| {
+    let bmax = 2.0 * 2.0;
+    do bench("Goldstein", -3.0, &mut ga) |c| {
         // Restrict to hypercube -5.12 <= x <= 5.12
-        0.0 - c.iter().fold(0.0, |a, e| {
-                                let e2 = (*e - 0.5) * bmax;
-                                a + ((e2 as int) as f64)
-                            })
+        let e1 = (c[0] - 0.5) * bmax;
+        let e2 = (c[1] - 0.5) * bmax;
+
+        let a = 1.0 + (e1 + e2 + 1.0).pow(~2.0) *
+                 (19.0 - 14.0 * e1 + 13.0 * e1.pow(~2.0) - 14.0 * e2 +
+                  6.0 * e1 * e2 + 3.0 * e2.pow(~2.0));
+        let b =  30.0 + (2.0 * e1 - 3.0 * e2).pow(~2.0) *
+                 (18.0 - 32.0 * e1 + 12.0 * e1.pow(~2.0) - 48.0 * e2 -
+                  36.0 * e1 * e2 + 27.0 * e2 * e2);
+        -a * b
     }
 }

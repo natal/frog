@@ -31,13 +31,17 @@ fn bench(name: &str, thresh: f64, ga: &mut GeneticAlgorithm<f64>, fit_fn: &fn(co
 
 #[main]
 fn main() {
-    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(3000, 2, 0.8, 60.0, 100);
-    let bmax = 5.12 * 2.0;
-    do bench("De Jong f3", 9.0, &mut ga) |c| {
+    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(4000, 10, 0.5, 50.0, 130);
+    do bench("Rosenbrock", 9.19, &mut ga) |c| {
         // Restrict to hypercube -5.12 <= x <= 5.12
-        0.0 - c.iter().fold(0.0, |a, e| {
-                                let e2 = (*e - 0.5) * bmax;
-                                a + ((e2 as int) as f64)
-                            })
+
+        let bmax = 2.0 * 2.048;
+        let mut res  = 0.0;
+        for (i, e) in c.iter().take(c.len() - 1).enumerate() {
+            let e1 = (*e - 0.5) * bmax;
+            let e2: f64 = (c[i + 1] - 0.5) * bmax;
+            res += 100.0 * (e1.pow(~2.0) - e2).pow(~2.0) + (e1 - 1.0);
+        }
+        -res
     }
 }

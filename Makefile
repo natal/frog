@@ -8,6 +8,8 @@ all:
 	rustc --opt-level=3 examples/michalewicz.rs -L./lib --out-dir bin
 	rustc --opt-level=3 examples/dejongf2.rs -L./lib --out-dir bin
 	rustc --opt-level=3 examples/dejongf3.rs -L./lib --out-dir bin
+	rustc --opt-level=3 examples/goldstein.rs -L./lib --out-dir bin
+	rustc --opt-level=3 examples/rosenbrock.rs -L./lib --out-dir bin
 
 #deps:
 #	make -C lib/nalgebra
