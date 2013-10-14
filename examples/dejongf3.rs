@@ -31,7 +31,7 @@ fn bench(name: &str, thresh: f64, ga: &mut GeneticAlgorithm<f64>, fit_fn: &fn(co
 
 #[main]
 fn main() {
-    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(3000, 2, 0.8, 60.0, 100);
+    let mut ga: GeneticAlgorithm<f64> = GeneticAlgorithm::new(3000, 20, 0.8, 60.0, 100);
     let bmax = 5.12 * 2.0;
     do bench("De Jong f3", 9.0, &mut ga) |c| {
         // Restrict to hypercube -5.12 <= x <= 5.12
