@@ -6,6 +6,7 @@ all:
 	mkdir -p lib
 	rustc --lib --opt-level=3 src/lib.rs -L$(nalgebra_lib_path) --out-dir lib
 	$(build_ex_cmd) examples/dejong_simulated_annealing.rs
+	$(build_ex_cmd) examples/dejongf2_simulated_annealing.rs
 	$(build_ex_cmd) examples/dejong.rs
 	$(build_ex_cmd) examples/michalewicz.rs
 	$(build_ex_cmd) examples/dejongf2.rs
@@ -13,6 +14,9 @@ all:
 	$(build_ex_cmd) examples/goldstein.rs
 	$(build_ex_cmd) examples/rosenbrock.rs
 	$(build_ex_cmd) examples/schwefel.rs
+
+doc:
+	rustdoc -L$(nalgebra_lib_path) src/lib.rs
 
 deps:
 	make -C lib/nalgebra
