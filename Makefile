@@ -7,6 +7,7 @@ all:
 	rustc --lib --opt-level=3 src/lib.rs -L$(nalgebra_lib_path) --out-dir lib
 	$(build_ex_cmd) examples/dejong_simulated_annealing.rs
 	$(build_ex_cmd) examples/dejongf2_simulated_annealing.rs
+	$(build_ex_cmd) examples/dejongf3_simulated_annealing.rs
 	$(build_ex_cmd) examples/dejong.rs
 	$(build_ex_cmd) examples/michalewicz.rs
 	$(build_ex_cmd) examples/dejongf2.rs

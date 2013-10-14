@@ -10,9 +10,6 @@ fn main() {
     let mut x: Vec2<f64> = rand::random();
     x = x * 5.0;
 
-    println!("Initial energy: {}", dejongf2(&Vec2::new(1.0, 1.0)));
-    println!("Initial energy: {}", dejongf2(&Vec2::new(0.0, 0.0)));
-
     simulated_annealing::solve(
         200000000000,
         1.0,
